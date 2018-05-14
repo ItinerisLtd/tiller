@@ -1,0 +1,38 @@
+version: 0.2
+
+env:
+  variables:
+    BOT_NAME: xxxbot
+    TRELLIS_REPO: 'git@github.com:xxx/xxx.git'
+    SITE_KEY: xxx
+    SITE_ENV: xxx
+
+phases:
+  # Install project-specific dependencies if needed
+  # install:
+  #   commands:
+  #     - command
+  #     - command
+
+  pre_build:
+    commands:
+      # Set up SSH key
+      - echo $BOT_PRIVATE_KEY > ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/*
+      - eval `ssh-agent -s`
+      - ~/expect-ssh-add.sh id_rsa $BOT_PRIVATE_KEY_PASSPHASE
+      # Set up Trellis
+      - git clone --depth 1 $TRELLIS_REPO ~/trellis
+      # Set up Bedrock
+      - mkdir ~/bedrock
+      - cp -a $CODEBUILD_SRC_DIR ~/bedrock
+
+  # Deploy
+  build:
+    commands:
+      - cd ~/trellis && ansible-galaxy install -r requirements.yml
+      - ~/trellis/bin/deploy.sh $SITE_ENV $SITE_KEY -e bastion_user=$BOT_NAME -vvvv
+
+cache:
+  paths:
+    - /root/.composer/cache/files
