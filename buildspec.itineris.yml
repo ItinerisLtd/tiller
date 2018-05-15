@@ -1,0 +1,38 @@
+version: 0.2
+
+env:
+  variables:
+    ANSIBLE_HOST_KEY_CHECKING: false
+    #BASTION_USER: tangrufusbot
+    BEDROCK_PATH: /tmp/bedrock
+    #SITE_ENV: production
+    SITE_KEY: sagepay.itineris.co.uk
+    TRELLIS_PATH: /tmp/trellis
+    TRELLIS_REPO: 'git@github.com:TangRufus/sagepay.itineris.co.uk-trellis.git'
+
+phases:
+  install:
+    commands:
+      # Start SSH agent
+      - eval `ssh-agent -s`
+
+  pre_build:
+    commands:
+      # Add private key to SSH agent
+      - echo "$PRIVATE_KEY" > $HOME/.ssh/id_rsa
+      - chmod 600 $HOME/.ssh/id_rsa*
+      - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHASE
+      # Prepare Bedrock
+      - cp -a $CODEBUILD_SRC_DIR $BEDROCK_PATH
+      # Prepare Trellis
+      - git clone --depth 1 $TRELLIS_REPO $TRELLIS_PATH
+      - cd $TRELLIS_PATH && ansible-galaxy install -r requirements.yml --force
+
+  # Deploy
+  build:
+    commands:
+      - cd $TRELLIS_PATH && ansible-playbook deploy.yml -e env=$SITE_ENV -e site=$SITE_KEY -e bastion_user=$BASTION_USER -vvvv
+
+cache:
+  paths:
+    - /usr/local/share/.cache/yarn/v1/**/*
