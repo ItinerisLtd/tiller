@@ -84,14 +84,14 @@ Use ~~`itinerisltd/tiller`~~ `tangrufus/tiller` as `custom image id`.
 
 #### Artifacts & Cache
 
-![](./create-parameter.png)
+![](./artifacts-and-cache.png)
 
 **Optional:** The `buildspec.yml` example caches yarn modules by default. Caching them into S3 buckets speed up the build by ~15 seconds.
 
 #### Environment Variables
 
 ![](./environment-variables.png)
-![](./environment-variables.png)
+![](./create-parameter.png)
 
 | Name                  | Value                | Type            |
 | --------------------- | -------------------- | --------------- |
