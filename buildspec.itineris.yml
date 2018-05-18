@@ -3,12 +3,8 @@ version: 0.2
 env:
   variables:
     ANSIBLE_HOST_KEY_CHECKING: false
-    #BASTION_USER: tangrufusbot
     BEDROCK_PATH: /tmp/bedrock
-    #SITE_ENV: production
-    SITE_KEY: sagepay.itineris.co.uk
     TRELLIS_PATH: /tmp/trellis
-    TRELLIS_REPO: 'git@github.com:TangRufus/sagepay.itineris.co.uk-trellis.git'
 
 phases:
   install:

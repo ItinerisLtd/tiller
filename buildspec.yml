@@ -3,7 +3,6 @@ version: 0.2
 env:
   variables:
     ANSIBLE_HOST_KEY_CHECKING: false
-    SITE_KEY: example.com # TODO: Change me!
 
 phases:
   install:
