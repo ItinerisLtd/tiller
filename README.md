@@ -134,7 +134,7 @@ Use [`itinerisltd/tiller`](https://hub.docker.com/r/itinerisltd/tiller/). See [b
 
 ##### `PRIVATE_KEY` & `PRIVATE_KEY_PASSPHASE`
 
-Encrypt `PRIVATE_KEY` and `PRIVATE_KEY_PASSPHASE` with [AWS Systems Manager Parameter Store and AWS KMS]((https://docs.aws.amazon.com/kms/latest/developerguide/services-parameter-store.html)). **Never save them in plaintext!**
+Encrypt `PRIVATE_KEY` and `PRIVATE_KEY_PASSPHASE` with [AWS Systems Manager Parameter Store and AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-parameter-store.html). **Never save them in plaintext!**
 
 
 `PRIVATE_KEY` needs line break characters(`\n`) For example:
