@@ -15,7 +15,7 @@ Deploy Trellis, Bedrock and Sage via AWS CodeBuild.
   - [AWS CodeBuild](#aws-codebuild)
     - [Docker Image](#docker-image)
     - [Environment Variables](#environment-variables)
-      - [`PRIVATE_KEY` & `PRIVATE_KEY_PASSPHASE`](#private_key--private_key_passphase)
+      - [`PRIVATE_KEY` & `PRIVATE_KEY_PASSPHRASE`](#private_key--private_key_passphrase)
     - [`SITE_ENV` & `SITE_KEY`](#site_env--site_key)
     - [Examples](#examples)
   - [Docker Image](#docker-image-1)
@@ -52,7 +52,7 @@ You need a robot user for deployment. In this example, we will use a GitHub mach
 1. Grant `mybot` **read** access to all necessary private repos
 1. Generate a SSH key pair
     - `ssh-keygen -t ed25519 -C "mybot-$(date)"`
-    - It must use a passphase
+    - It must use a passphrase
 1. [Upload the public key to Github](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 
 ### Trellis
@@ -126,15 +126,15 @@ Use [`itinerisltd/tiller`](https://hub.docker.com/r/itinerisltd/tiller/). See [b
 | Name                  | Value                      | Type            |                                |
 | --------------------- | -------------------------- | --------------- | ------------------------------ |
 | PRIVATE_KEY           | /ssm/the-private-key       | Parameter Store |                                |
-| PRIVATE_KEY_PASSPHASE | /ssm/the-passphase         | Parameter Store |                                |
+| PRIVATE_KEY_PASSPHRASE | /ssm/the-passphrase         | Parameter Store |                                |
 | SITE_ENV              | production                 | Plaintext       |                                |
 | SITE_KEY              | example.com                | Plaintext       |                                |
 | BASTION_USER          | mybot                      | Plaintext       | `buildspec.itineris.yml ` only |
 | TRELLIS_REPO          | git@github.com:xxx/yyy.git | Plaintext       | `buildspec.itineris.yml ` only |
 
-##### `PRIVATE_KEY` & `PRIVATE_KEY_PASSPHASE`
+##### `PRIVATE_KEY` & `PRIVATE_KEY_PASSPHRASE`
 
-Encrypt `PRIVATE_KEY` and `PRIVATE_KEY_PASSPHASE` with [AWS Systems Manager Parameter Store and AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-parameter-store.html). **Never save them in plaintext!**
+Encrypt `PRIVATE_KEY` and `PRIVATE_KEY_PASSPHRASE` with [AWS Systems Manager Parameter Store and AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-parameter-store.html). **Never save them in plaintext!**
 
 
 `PRIVATE_KEY` needs line break characters(`\n`) For example:
@@ -222,8 +222,8 @@ phases:
       - echo "$PRIVATE_KEY" > $HOME/.ssh/id_rsa
       - echo "$PRIVATE_KEY_SECOND" > $HOME/.ssh/id_rsa_second
       - chmod 600 $HOME/.ssh/id_rsa*
-      - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHASE
-      - expect-ssh-add.sh id_rsa_second $PRIVATE_KEY_PASSPHASE_SECOND
+      - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHRASE
+      - expect-ssh-add.sh id_rsa_second $PRIVATE_KEY_PASSPHRASE_SECOND
 ```
 
 ### What does S3 bucket cache?

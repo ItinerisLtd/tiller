@@ -17,7 +17,7 @@ phases:
       # Add private key to SSH agent
       - echo "$PRIVATE_KEY" > $HOME/.ssh/id_rsa
       - chmod 600 $HOME/.ssh/id_rsa*
-      - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHASE
+      - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHRASE
       # Prepare Bedrock
       - cp -a $CODEBUILD_SRC_DIR $BEDROCK_PATH
       # Prepare Trellis
