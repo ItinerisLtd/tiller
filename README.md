@@ -21,8 +21,8 @@ Deploy Trellis, Bedrock and Sage via AWS CodeBuild.
   - [Docker Image](#docker-image-1)
 - [FAQ](#faq)
   - [Is is a must to use all Trellis, Bedrock and Sage?](#is-is-a-must-to-use-all-trellis-bedrock-and-sage)
-  - [Is is a must to AWS CodeBuild?](#is-is-a-must-to-aws-codebuild)
-  - [Is is a must to GitHub?](#is-is-a-must-to-github)
+  - [Is is a must to use AWS CodeBuild?](#is-is-a-must-to-use-aws-codebuild)
+  - [Is is a must to use GitHub?](#is-is-a-must-to-use-github)
   - [Can I use multiple SSH key pairs?](#can-i-use-multiple-ssh-key-pairs)
 - [Author Information](#author-information)
 - [Feedback](#feedback)
@@ -202,11 +202,11 @@ This is enough sufficient for deploying a default Trellis, Bedrock and Sage proj
 
 No, you don't need all of them. Only Trellis is required.
 
-### Is is a must to AWS CodeBuild?
+### Is is a must to use AWS CodeBuild?
 
 No. You can use the docker image without AWS CodeBuild.
 
-### Is is a must to GitHub?
+### Is is a must to use GitHub?
 
 No.
 
