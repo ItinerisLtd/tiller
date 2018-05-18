@@ -24,6 +24,7 @@ Deploy Trellis, Bedrock and Sage via AWS CodeBuild.
   - [Is is a must to use AWS CodeBuild?](#is-is-a-must-to-use-aws-codebuild)
   - [Is is a must to use GitHub?](#is-is-a-must-to-use-github)
   - [Can I use multiple SSH key pairs?](#can-i-use-multiple-ssh-key-pairs)
+  - [What does S3 bucket cache?](#what-does-s3-bucket-cache)
 - [Author Information](#author-information)
 - [Feedback](#feedback)
 
@@ -224,6 +225,11 @@ phases:
       - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHASE
       - expect-ssh-add.sh id_rsa_second $PRIVATE_KEY_PASSPHASE_SECOND
 ```
+
+### What does S3 bucket cache?
+
+By default only yarn packages are cached. It speeds up the build by 20~60 seconds.
+This is optional and you can add more `cache.paths`.
 
 ## Author Information
 
