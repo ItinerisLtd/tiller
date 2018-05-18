@@ -19,6 +19,11 @@ Deploy Trellis, Bedrock and Sage via AWS CodeBuild.
     - [`SITE_ENV` & `SITE_KEY`](#site_env--site_key)
     - [Examples](#examples)
   - [Docker Image](#docker-image-1)
+- [FAQ](#faq)
+  - [Is is a must to use all Trellis, Bedrock and Sage?](#is-is-a-must-to-use-all-trellis-bedrock-and-sage)
+  - [Is is a must to AWS CodeBuild?](#is-is-a-must-to-aws-codebuild)
+  - [Is is a must to GitHub?](#is-is-a-must-to-github)
+  - [Can I use multiple SSH key pairs?](#can-i-use-multiple-ssh-key-pairs)
 - [Author Information](#author-information)
 - [Feedback](#feedback)
 
@@ -27,9 +32,9 @@ Deploy Trellis, Bedrock and Sage via AWS CodeBuild.
 ## Requirements
 
 - Trellis [b556ccd](https://github.com/roots/trellis/commit/b556ccdb2b3183eba4a9530b206a402422deeca3) or later
-- Bedrock [ef090b6](https://github.com/roots/bedrock/commit/ef090b63ca0b772390a1db03cc7c118af20e8733) or later
+- (Optional) Bedrock [ef090b6](https://github.com/roots/bedrock/commit/ef090b63ca0b772390a1db03cc7c118af20e8733) or later
 - (Optional) Sage [9.0.1](https://github.com/roots/sage/releases/tag/9.0.1) or later
-- AWS [CodeBuild](https://aws.amazon.com/codebuild/)
+- (Optional) AWS [CodeBuild](https://aws.amazon.com/codebuild/)
 
 ## What's in the box?
 
@@ -100,7 +105,7 @@ example.com/      # → Root folder for the project
 See: [roots/trellis#883 (comment)](https://github.com/roots/trellis/issues/883#issuecomment-329052189)
 
 To install:
-- Option A: Use the buildspec.yml in the source code root directory
+- Option A: Use the `buildspec.yml` in the source code root directory
     1. Copy and commit the `.yml` file to project root
     1. Review the `.yml` file, change if necessary
     1. Enter the `.yml` file name on AWS web console
@@ -128,7 +133,7 @@ Use [`itinerisltd/tiller`](https://hub.docker.com/r/itinerisltd/tiller/). See [b
 
 ##### `PRIVATE_KEY` & `PRIVATE_KEY_PASSPHASE`
 
-Encrypt `PRIVATE_KEY` and `PRIVATE_KEY_PASSPHASE` with AWS Systems Manager Parameter Store and AWS KMS. Never save them in plaintext! See: [How AWS Systems Manager Parameter Store Uses AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-parameter-store.html)
+Encrypt `PRIVATE_KEY` and `PRIVATE_KEY_PASSPHASE` with [AWS Systems Manager Parameter Store and AWS KMS]((https://docs.aws.amazon.com/kms/latest/developerguide/services-parameter-store.html)). **Never save them in plaintext!**
 
 
 `PRIVATE_KEY` needs line break characters(`\n`) For example:
@@ -163,7 +168,7 @@ They are used to build the final deploy command:
 
 ### Docker Image
 
-Tiller maintain a [docker image](https://hub.docker.com/r/itinerisltd/tiller/) to run Trellis deployment:
+Tiller comes with a [docker image](https://hub.docker.com/r/itinerisltd/tiller/) to run Trellis deployment:
 - Ubuntu 16.04
 - libpng-dev
 - NodeJS v8
@@ -189,6 +194,35 @@ This is enough sufficient for deploying a default Trellis, Bedrock and Sage proj
 # Push the image
 ➜ docker push itinerisltd/tiller:2018.5.18.2
 ➜ docker push itinerisltd/tiller:latest
+```
+
+## FAQ
+
+### Is is a must to use all Trellis, Bedrock and Sage?
+
+No, you don't need all of them. Only Trellis is required.
+
+### Is is a must to AWS CodeBuild?
+
+No. You can use the docker image without AWS CodeBuild.
+
+### Is is a must to GitHub?
+
+No.
+
+### Can I use multiple SSH key pairs?
+
+Yes.
+
+```yaml
+phases:
+  pre_build:
+    commands:
+      - echo "$PRIVATE_KEY" > $HOME/.ssh/id_rsa
+      - echo "$PRIVATE_KEY_SECOND" > $HOME/.ssh/id_rsa_second
+      - chmod 600 $HOME/.ssh/id_rsa*
+      - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHASE
+      - expect-ssh-add.sh id_rsa_second $PRIVATE_KEY_PASSPHASE_SECOND
 ```
 
 ## Author Information
