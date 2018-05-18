@@ -45,8 +45,8 @@ RUN apt-get -q update && apt-get install -q -y --no-install-recommends \
 
 RUN mkdir -m 700 ~/.ssh
 
-## Add GitHub host key
-RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+## Add host keys
+RUN ssh-keyscan github.com bitbucket.org gitlab.com >> ~/.ssh/known_hosts
 RUN chmod 700 ~/.ssh/known_hosts
 
 ## Copy ssh-add helper script
