@@ -179,7 +179,7 @@ Tiller comes with a [docker image](https://hub.docker.com/r/itinerisltd/tiller/)
 - Host keys: github.com, bitbucket.org, gitlab.com
 - [expect-ssh-add.sh](./expect-ssh-add.sh)
 
-This is enough sufficient for deploying a default Trellis, Bedrock and Sage project. You can build your own docker image if necessary:
+This is sufficient for deploying a default Trellis, Bedrock and Sage project. You can build your own docker image if necessary:
 
 ```bash
 # Modify `Dockerfile`
