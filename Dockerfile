@@ -54,8 +54,7 @@ RUN apt-get -q update && \
 ## Add host keys
 RUN mkdir -m 700 ~/.ssh && ssh-keyscan github.com bitbucket.org gitlab.com bastion.itineris.co.uk 35.176.46.36 >> ~/.ssh/known_hosts
 
-## Copy ssh-add helper script
-COPY *.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/*.sh
+## Add ssh-add helper script
+COPY expect-ssh-add.sh /usr/local/bin/
 
 CMD ["bash"]
