@@ -10,7 +10,7 @@ RUN apt-get -q update && \
   apt-get install -q -y --no-install-recommends \
     curl \
     software-properties-common \
-    sudo &&  \
+    sudo && \
   # Clean up APT when done
   apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -31,7 +31,7 @@ RUN \
 # Install APT packages
 ######################
 
-RUN apt-get -q update &&  \
+RUN apt-get -q update && \
   apt-get install -q -y --no-install-recommends \
     ## Ansible
     ansible \
