@@ -17,15 +17,16 @@ RUN apt-get -q update && \
 # Prepare APT package repositories
 ##################################
 
-# Ansible
-RUN apt-add-repository ppa:ansible/ansible
-
-## NodeSource
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-
-## Yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN \
+  ## Ansible
+  apt-add-repository ppa:ansible/ansible && \
+  ## NodeSource
+  curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
+  ## Yarn
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+  # Clean up APT when done
+  apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install APT packages
 ######################
