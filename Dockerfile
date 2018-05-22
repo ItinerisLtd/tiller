@@ -54,7 +54,6 @@ RUN mkdir -m 700 ~/.ssh
 
 ## Add host keys
 RUN ssh-keyscan github.com bitbucket.org gitlab.com bastion.itineris.co.uk 35.176.46.36 >> ~/.ssh/known_hosts
-RUN chmod 700 ~/.ssh/known_hosts
 
 ## Copy ssh-add helper script
 COPY *.sh /usr/local/bin/
