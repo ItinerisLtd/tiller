@@ -41,6 +41,7 @@ RUN apt-get -q update && \
     yarn \
     ## Sage
     libpng-dev \
+    libpng16-16 \
     ## Misc
     expect \
     git \
