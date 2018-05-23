@@ -13,7 +13,7 @@ phases:
   pre_build:
     commands:
       # Add private key to SSH agent
-      - echo "$PRIVATE_KEY" > $HOME/.ssh/id_rsa
+      - echo -e "$PRIVATE_KEY" > $HOME/.ssh/id_rsa
       - chmod 600 $HOME/.ssh/id_rsa*
       - expect-ssh-add.sh id_rsa $PRIVATE_KEY_PASSPHRASE
 
