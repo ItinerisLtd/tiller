@@ -172,6 +172,7 @@ They are used to build the final deploy command:
 Tiller comes with a [docker image](https://hub.docker.com/r/itinerisltd/tiller/) to run Trellis deployment:
 - Ubuntu 16.04
 - libpng-dev
+- libpng16-16
 - NodeJS v8
 - Yarn
 - Anisble
