@@ -129,7 +129,7 @@ Use [`itinerisltd/tiller`](https://hub.docker.com/r/itinerisltd/tiller/). See [b
 | PRIVATE_KEY_PASSPHRASE | /ssm/the-passphrase         | Parameter Store |                                |
 | SITE_ENV              | production                 | Plaintext       |                                |
 | SITE_KEY              | example.com                | Plaintext       |                                |
-| BASTION_USER          | mybot                      | Plaintext       | `buildspec.itineris.yml ` only |
+| BASTION_USER          | mybot                      | Plaintext       | `buildspec.itineris.yml ` only, omit `BASTION_USER` for Kinsta |
 | TRELLIS_REPO          | git@github.com:xxx/yyy.git | Plaintext       | `buildspec.itineris.yml ` only |
 
 ##### `PRIVATE_KEY` & `PRIVATE_KEY_PASSPHRASE`

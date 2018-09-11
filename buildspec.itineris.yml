@@ -27,6 +27,7 @@ phases:
   # Deploy
   build:
     commands:
+      # Omit `-e bastion_user=$BASTION_USER ` for Kinsta
       - cd $TRELLIS_PATH && ansible-playbook deploy.yml -e env=$SITE_ENV -e site=$SITE_KEY -e bastion_user=$BASTION_USER -vvvv
 
 cache:
