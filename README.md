@@ -1,3 +1,7 @@
+**[Deprecated] Use [ItinerisLtd/tiller-circleci-orb](https://github.com/ItinerisLtd/tiller-circleci-orb) instead.**
+
+---
+
 # Tiller
 
 Deploy Trellis, Bedrock and Sage via AWS CodeBuild.
